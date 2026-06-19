@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Anchor by Aurex Digital — track EMIs, pay loans, and manage your vehicle finance account from your phone." />
+  <title>Anchor — Vehicle Finance Borrower App | Aurex Digital</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --surface: #ffffff;
+      --text: #1a2332;
+      --muted: #5b677a;
+      --border: #dbe3ef;
+      --accent: #1f4b99;
+      --accent-dark: #163a78;
+      --accent-soft: #e8f0ff;
+      --hero-start: #163a78;
+      --hero-mid: #1f4b99;
+      --hero-end: #2d6cdf;
+      --max-width: 960px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .container { width: min(100% - 2rem, var(--max-width)); margin: 0 auto; }
+    a { color: var(--accent); }
+
+    /* Nav */
+    .top-nav {
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+    }
+    .top-nav .inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 0;
+      gap: 1rem;
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent-dark);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--hero-start), var(--hero-mid) 55%, var(--hero-end));
+      color: #fff;
+      padding: clamp(3rem, 8vw, 5rem) 0 clamp(4rem, 10vw, 6rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12), transparent 45%);
+      pointer-events: none;
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero .eyebrow {
+      margin: 0 0 0.5rem;
+      opacity: 0.8;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 7vw, 3.5rem);
+      line-height: 1.1;
+      max-width: 12ch;
+    }
+    .hero .tagline {
+      margin: 1rem 0 0;
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+      opacity: 0.92;
+      max-width: 36rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.35rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: #fff;
+      color: var(--accent-dark);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    .btn-outline {
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      color: #fff;
+    }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+
+    /* Main sections */
+    main { padding-bottom: 3rem; }
+    .section { padding: 2.5rem 0 0; }
+    .section h2 {
+      margin: 0 0 0.35rem;
+      font-size: 1.5rem;
+      color: var(--accent-dark);
+    }
+    .section .lead {
+      margin: 0 0 1.5rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem 1.35rem;
+      box-shadow: 0 8px 24px rgba(22, 58, 120, 0.05);
+    }
+    .feature-card .icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.05rem;
+      color: #123066;
+    }
+    .feature-card p {
+      margin: 0;
+      color: #243044;
+      font-size: 0.95rem;
+    }
+
+    .steps {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      counter-reset: step;
+    }
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      position: relative;
+    }
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+    .step h3 { margin: 0 0 0.35rem; font-size: 1rem; color: #123066; }
+    .step p { margin: 0; font-size: 0.92rem; color: var(--muted); }
+
+    .legal-strip {
+      margin-top: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .legal-strip p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .legal-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .legal-links a {
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .legal-links a:hover { text-decoration: underline; }
+
+    .contact-box {
+      margin-top: 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .contact-box a { font-weight: 600; }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+    .site-footer p { margin: 0.25rem 0; }
+    .site-footer a { color: var(--accent); text-decoration: none; }
+    .site-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="container inner">
+      <a class="brand" href="index.html">ANCHOR</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">Aurex Digital</p>
+      <h1>Anchor</h1>
+      <p class="tagline">Track EMI schedule, payments &amp; receipts — your vehicle finance account, in your pocket.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#download">Get the app</a>
+        <a class="btn btn-outline" href="#how-it-works">See how it works</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="features" class="section container">
+      <h2>Built for borrowers</h2>
+      <p class="lead">Anchor connects you with your finance company. View your loan, stay on top of EMIs, and keep services running — all from one app.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon" aria-hidden="true">₹</div>
+          <h3>EMI schedule &amp; balance</h3>
+          <p>See upcoming due dates, overdue counts, remaining balance, and your full repayment schedule.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon" aria-hidden="true">↗</div>
+          <h3>Pay &amp; receipts</h3>
+          <p>Initiate EMI payments through methods configured by your finance company and download receipts.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon" aria-hidden="true">📄</div>
+          <h3>Loan documents</h3>
+          <p>Access agreement documents shared by your finance company, right from the app.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon" aria-hidden="true">🔔</div>
+          <h3>EMI reminders</h3>
+          <p>Get notified before your payment due date so you never miss an installment.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon" aria-hidden="true">🚗</div>
+          <h3>Multiple loans</h3>
+          <p>Link and switch between multiple vehicle loans on the same device.</p>
+        </article>
+        <article class="feature-card">
+          <div class="icon" aria-hidden="true">📍</div>
+          <h3>Vehicle location sync</h3>
+          <p>With your consent, periodic location updates help your finance company protect financed vehicles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section container">
+      <h2>How it works</h2>
+      <p class="lead">Sign in with details from your finance agreement — no separate account signup needed.</p>
+      <div class="steps">
+        <article class="step">
+          <h3>Download Anchor</h3>
+          <p>Install the app from Google Play on your Android phone.</p>
+        </article>
+        <article class="step">
+          <h3>Sign in</h3>
+          <p>Enter your vehicle registration number and loan agreement / reference number.</p>
+        </article>
+        <article class="step">
+          <h3>View your dashboard</h3>
+          <p>Check EMIs, payment history, loan summary, and documents.</p>
+        </article>
+        <article class="step">
+          <h3>Grant consent</h3>
+          <p>Accept terms and allow location access when prompted, as required by your finance company.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="download" class="section container">
+      <h2>Get the app</h2>
+      <p class="lead">Anchor is available on Android. Ask your finance company if you need login credentials.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">Download on Google Play</a>
+      </div>
+      <p class="contact-box">
+        Questions? Contact <a href="mailto:info@aurexdigital.in">info@aurexdigital.in</a>
+      </p>
+    </section>
+
+    <section class="section container">
+      <div class="legal-strip">
+        <p>By using Anchor you agree to our legal terms. Location is collected only after explicit in-app consent.</p>
+        <div class="legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Aurex Digital. All rights reserved.</p>
+      <p>
+        <a href="privacy.html">Privacy</a> ·
+        <a href="terms.html">Terms</a> ·
+        <a href="mailto:info@aurexdigital.in">info@aurexdigital.in</a>
+      </p>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
